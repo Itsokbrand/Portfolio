@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio | Rym</title>
+  <style>
+    :root {
+      --primary: #00b4d8;
+      --secondary: #0077b6;
+      --bg: #f9f9f9;
+      --text: #222;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease-in-out;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #dff6ff;
+    }
+
+    #darkToggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: white;
+      color: #000;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 30px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    section h2 {
+      color: var(--secondary);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .project {
+      background: #e6f1f5;
+      border-left: 5px solid var(--primary);
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 12px;
+      transition: transform 0.3s ease, background 0.3s;
+    }
+
+    .project:hover {
+      transform: scale(1.02);
+      background: #caf0f8;
+    }
+
+    .project h3 {
+      margin-top: 0;
+    }
+
+    .project a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+      transition: border 0.3s;
+    }
+
+    .project a:hover {
+      border-bottom: 2px solid var(--secondary);
+    }
+
+    footer {
+      background: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      font-size: 0.95rem;
+      border-top: 5px solid var(--primary);
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg: #121212;
+      --text: #f1f1f1;
+    }
+
+    body.dark section {
+      background: rgba(255, 255, 255, 0.05);
+      color: #f1f1f1;
+    }
+
+    body.dark .project {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark header {
+      background: linear-gradient(135deg, #003566, #001d3d);
+    }
+
+    body.dark footer {
+      background: #000814;
+    }
+
+    body.dark #darkToggle {
+      background: #fff;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      section {
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button id="darkToggle">🌙 Dark Mode</button>
+    <h1>Hello, I'm <span style="color:#ffe66d;">Rym</span></h1>
+    <p>Web Developer & Designer</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>
+  
+👩‍💻 Hi! I'm a self-driven web developer dedicated to creating clean, functional, and visually engaging websites. Turning ideas into reality through code and design. Whether it's a personal blog, an e-commerce store, or a landing page — every project you see here has been handcrafted with attention to detail and a love for the process.
+
+With each website I build, I aim to blend creativity with usability, ensuring responsive layouts, smooth user experiences, and modern aesthetics. I'm constantly learning and improving, and this portfolio is a reflection of my journey, skills, and growth in web development.
+
+Let’s build something amazing together!
+    </p>
+  </section>
+
+  <section>
+    <h2>My Projects</h2>
+
+
+    <div class="project">
+      <h3>Blogs</h3>
+      <p>Streamlined UI for scheduling, ideal for businesses and services.</p>
+      <a href="https://selverleafblog.onrender.com/" target="_blank">View Project</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact Me</h2>
+    <p>You believe your project deserves to be more than just an idea? Let's connect → <a href="https://www.instagram.com/rymxdev?igsh=MW8yYTRodHNsdTNyeA==" target="_blank">INSTAGRAM </a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 All rights reserved — Your Name</p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('darkToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+  </script>
+</body>
+</html>
+
