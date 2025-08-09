@@ -10,6 +10,7 @@
       --secondary: #0077b6;
       --bg: #f9f9f9;
       --text: #222;
+      --highlight: #ffe66d;
     }
 
     body {
@@ -27,16 +28,36 @@
       text-align: center;
       padding: 80px 20px 60px;
       position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 70%);
+      animation: rotate 10s infinite linear;
+      z-index: 0;
     }
 
     header h1 {
       font-size: 3rem;
       margin-bottom: 10px;
+      background: linear-gradient(to right, var(--highlight), white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      z-index: 1;
     }
 
     header p {
       font-size: 1.3rem;
       color: #dff6ff;
+      position: relative;
+      z-index: 1;
     }
 
     #darkToggle {
@@ -50,7 +71,13 @@
       border-radius: 20px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease;
+      z-index: 2;
+    }
+
+    #darkToggle:hover {
+      transform: scale(1.1);
+      background: var(--highlight);
     }
 
     section {
@@ -68,6 +95,18 @@
       color: var(--secondary);
       font-size: 2.2rem;
       margin-bottom: 20px;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      bottom: -8px;
+      left: 0;
+      border-radius: 2px;
     }
 
     .project {
@@ -76,12 +115,13 @@
       margin: 20px 0;
       padding: 20px;
       border-radius: 12px;
-      transition: transform 0.3s ease, background 0.3s;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .project:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px) scale(1.02);
       background: #caf0f8;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
     .project h3 {
@@ -95,11 +135,12 @@
       color: var(--secondary);
       font-weight: bold;
       border-bottom: 2px solid transparent;
-      transition: border 0.3s;
+      transition: border 0.3s ease, color 0.3s ease;
     }
 
     .project a:hover {
       border-bottom: 2px solid var(--secondary);
+      color: var(--primary);
     }
 
     footer {
@@ -111,13 +152,14 @@
       border-top: 5px solid var(--primary);
     }
 
-    a {
-      color: var(--primary);
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Dark mode */
@@ -143,16 +185,10 @@
       background: #000814;
     }
 
-    body.dark #darkToggle {
-      background: #fff;
-      color: #000;
-    }
-
     @media (max-width: 600px) {
       header h1 {
         font-size: 2rem;
       }
-
       section {
         margin: 20px;
       }
@@ -163,46 +199,42 @@
 
   <header>
     <button id="darkToggle">🌙 Dark Mode</button>
-    <h1>Hello, I'm <span style="color:#ffe66d;">Rym</span></h1>
+    <h1>Hello, I'm Rym</h1>
     <p>Web Developer & Designer</p>
   </header>
 
   <section>
     <h2>About Me</h2>
-    <p>
-  
- Hi! I'm a web developer dedicated to creating clean, functional, and visually engaging websites. Turning ideas into reality through code and design. Whether it's a personal blog, an e-commerce store, or a landing page — every project you see here has been handcrafted with attention to detail and a love for the process.
+    <p> Hi! I'm a web developer dedicated to creating clean, functional, and visually engaging websites. Turning ideas into reality through code and design. Whether it's a personal blog, an e-commerce store, or a landing page — every project you see here has been handcrafted with attention to detail and a love for the process.
 
-With each website I build, I aim to blend creativity with usability, ensuring responsive layouts, smooth user experiences, and modern aesthetics. I'm constantly learning and improving, and this portfolio is a reflection of my journey, skills, and growth in web development.
+With each website I build, I aim to blend creativity with usability, ensuring responsive layouts, smooth user experiences, and modern aesthetics. I'm constantly learning and improving, and this portfolio is a reflection of my journey, skills, and growth in web development.</p>
 
-Let’s build something amazing together!👩‍💻
-    </p>
+<P>Let’s build something amazing together!👩‍💻</p>
+
   </section>
 
   <section>
     <h2>My Projects</h2>
-
-
     <div class="project">
       <h3>Blogs</h3>
-      <p>Streamlined UI for scheduling, ideal for businesses and services.</p>
+      <p>Shares insights, tips, and updates on topics that matter to our community.</p>
       <a href="https://selverleafblog.onrender.com/" target="_blank">View Project</a>
     </div>
-     <div class="project">
-      <h3>E-learning platfom</h3>
-      <p>Our e-learning platform allows users to learn anytime,anywhere,at their own space.</p>
+    <div class="project">
+      <h3>E-learning Platform</h3>
+      <p>Learn anytime, anywhere, at your own pace.</p>
       <a href="https://ecusoft.academy/" target="_blank">View Project</a>
     </div>
-     <div class="project">
+    <div class="project">
       <h3>Helps</h3>
-      <p>tips to get your health better</p>
+      <p>Tips to get your health better.</p>
       <a href="https://habit-gardenn.onrender.com/" target="_blank">View Project</a>
     </div>
   </section>
 
   <section>
     <h2>Contact Me</h2>
-    <p>You believe your project deserves to be more than just an idea? Let's connect → <a href="https://www.instagram.com/rymxdev?igsh=MW8yYTRodHNsdTNyeA==" target="_blank">INSTAGRAM </a></p>
+    <p>Think your project deserves to be more than just an idea? Let's connect → <a href="https://www.instagram.com/rymxdev?igsh=MW8yYTRodHNsdTNyeA==" target="_blank">Instagram</a></p>
   </section>
 
   <footer>
@@ -213,10 +245,12 @@ Let’s build something amazing together!👩‍💻
     const toggleBtn = document.getElementById('darkToggle');
     toggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? "☀️ Light Mode" : "🌙 Dark Mode";
     });
   </script>
 </body>
 </html>
+
 
 
 
