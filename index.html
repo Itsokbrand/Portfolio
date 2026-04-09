@@ -1,261 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio | Rym</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Rym Tacne | Creative Web Developer</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    :root {
-      --primary: #00b4d8;
-      --secondary: #0077b6;
-      --bg: #f9f9f9;
-      --text: #222;
-      --highlight: #ffe66d;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      transition: all 0.3s ease-in-out;
+      background: #0a0c10;
+      font-family: 'Inter', sans-serif;
+      color: #eef2ff;
+      line-height: 1.5;
+      overflow-x: hidden;
     }
 
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      text-align: center;
-      padding: 80px 20px 60px;
-      position: relative;
-      overflow: hidden;
+    /* creative gradient background animation */
+    .bg-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(circle at 20% 30%, #0f172a, #030712);
     }
 
-    header::after {
-      content: "";
+    .bg-glow::before {
+      content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 70%);
-      animation: rotate 10s infinite linear;
-      z-index: 0;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      background: radial-gradient(ellipse at 40% 60%, rgba(99, 102, 241, 0.15), transparent 60%);
+      animation: slowDrift 28s infinite alternate;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      background: linear-gradient(to right, var(--highlight), white);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    @keyframes slowDrift {
+      0% { transform: translate(0%, 0%) scale(1); opacity: 0.5; }
+      100% { transform: translate(5%, 8%) scale(1.2); opacity: 0.9; }
+    }
+
+    /* custom cursor effect */
+    .cursor {
+      width: 8px;
+      height: 8px;
+      background: #a5b4fc;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.08s linear;
+      mix-blend-mode: difference;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
       position: relative;
-      z-index: 1;
-    }
-
-    header p {
-      font-size: 1.3rem;
-      color: #dff6ff;
-      position: relative;
-      z-index: 1;
-    }
-
-    #darkToggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      color: #000;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.3s ease, background 0.3s ease;
       z-index: 2;
     }
 
-    #darkToggle:hover {
-      transform: scale(1.1);
-      background: var(--highlight);
+    /* header / navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1rem 0 2rem;
+      border-bottom: 1px solid rgba(165, 180, 252, 0.2);
     }
 
-    section {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 30px;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease;
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c7d2fe, #818cf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
     }
 
-    section h2 {
-      color: var(--secondary);
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      position: relative;
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      font-weight: 500;
     }
 
-    section h2::after {
-      content: "";
-      position: absolute;
-      width: 60px;
-      height: 4px;
-      background: var(--primary);
-      bottom: -8px;
-      left: 0;
-      border-radius: 2px;
-    }
-
-    .project {
-      background: #e6f1f5;
-      border-left: 5px solid var(--primary);
-      margin: 20px 0;
-      padding: 20px;
-      border-radius: 12px;
-      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-5px) scale(1.02);
-      background: #caf0f8;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .project h3 {
-      margin-top: 0;
-    }
-
-    .project a {
-      display: inline-block;
-      margin-top: 10px;
+    .nav-links a {
+      color: #cbd5e6;
       text-decoration: none;
-      color: var(--secondary);
-      font-weight: bold;
-      border-bottom: 2px solid transparent;
-      transition: border 0.3s ease, color 0.3s ease;
+      transition: 0.2s;
+      font-size: 0.95rem;
     }
 
-    .project a:hover {
-      border-bottom: 2px solid var(--secondary);
-      color: var(--primary);
+    .nav-links a:hover {
+      color: #a5b4fc;
+      transform: translateY(-2px);
+    }
+
+    /* hero section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 4rem 0 5rem;
+    }
+
+    .badge {
+      background: rgba(129, 140, 248, 0.2);
+      backdrop-filter: blur(6px);
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #c7d2fe, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .highlight {
+      color: #a5b4fc;
+      border-bottom: 2px dashed #818cf8;
+    }
+
+    .hero p {
+      max-width: 620px;
+      font-size: 1.2rem;
+      color: #b9c3e0;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(105deg, #4f46e5, #7c3aed);
+      color: white;
+      box-shadow: 0 8px 20px -8px rgba(79, 70, 229, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.03);
+      background: linear-gradient(105deg, #6366f1, #8b5cf6);
+      box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.6);
+    }
+
+    .btn-outline {
+      border-color: #818cf8;
+      color: #cbd5e1;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: rgba(129, 140, 248, 0.1);
+      border-color: #a5b4fc;
+      color: white;
+    }
+
+    /* skills marquee creative */
+    .skills-section {
+      margin: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 1.2rem 0;
+      border-radius: 70px;
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      margin-top: 1rem;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: scroll 24s linear infinite;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .marquee-content span {
+      margin: 0 2rem;
+      color: #cbd5f0;
+    }
+
+    .marquee-content i {
+      margin-right: 8px;
+      color: #818cf8;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* projects grid - creative cards */
+    .projects {
+      margin: 5rem 0;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(129, 140, 248, 0.2);
+      cursor: default;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      border-color: rgba(165, 180, 252, 0.5);
+      background: rgba(30, 41, 59, 0.7);
+      box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-icon {
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
+      color: #a5b4fc;
+    }
+
+    .project-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-card p {
+      color: #b9c3df;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .tech {
+      background: #1e293b;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #c7d2fe;
+    }
+
+    .project-link {
+      color: #a5b4fc;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover {
+      gap: 12px;
+      color: #e0e7ff;
+    }
+
+    /* about + contact combined */
+    .about-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin: 4rem 0;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 3rem;
+      padding: 2rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(129, 140, 248, 0.2);
+    }
+
+    .about-box, .contact-box {
+      flex: 1;
+    }
+
+    .about-box h2, .contact-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-box p {
+      color: #cbd5e6;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .social-links a {
+      background: #1e293b;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #cbd5e6;
+      font-size: 1.4rem;
+      transition: 0.2s;
+    }
+
+    .social-links a:hover {
+      background: #4f46e5;
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    .contact-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-box input, .contact-box textarea {
+      background: #111827;
+      border: 1px solid #334155;
+      border-radius: 1.2rem;
+      padding: 0.9rem 1.2rem;
+      color: #f1f5f9;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .contact-box input:focus, .contact-box textarea:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.3);
+    }
+
+    .contact-box button {
+      background: #4f46e5;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 2rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .contact-box button:hover {
+      background: #6366f1;
+      transform: scale(0.98);
     }
 
     footer {
-      background: #023e8a;
-      color: white;
       text-align: center;
-      padding: 25px;
-      font-size: 0.95rem;
-      border-top: 5px solid var(--primary);
+      padding-top: 3rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(129, 140, 248, 0.2);
+      font-size: 0.85rem;
+      color: #7e8aa8;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Dark mode */
-    body.dark {
-      --bg: #121212;
-      --text: #f1f1f1;
-    }
-
-    body.dark section {
-      background: rgba(255, 255, 255, 0.05);
-      color: #f1f1f1;
-    }
-
-    body.dark .project {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    body.dark header {
-      background: linear-gradient(135deg, #003566, #001d3d);
-    }
-
-    body.dark footer {
-      background: #000814;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
+    @media (max-width: 780px) {
+      .container {
+        padding: 1.5rem;
       }
-      section {
-        margin: 20px;
+      h1 {
+        font-size: 2.5rem;
       }
+      .hero p {
+        font-size: 1rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+    }
+
+    /* fun blob shapes */
+    .blob {
+      position: fixed;
+      bottom: -10%;
+      right: -5%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(99,102,241,0.2), rgba(139,92,246,0.05));
+      filter: blur(70px);
+      border-radius: 60% 40% 70% 30%;
+      z-index: -1;
+      animation: morph 18s infinite alternate;
+    }
+
+    @keyframes morph {
+      0% { border-radius: 60% 40% 70% 30%; transform: translate(0,0) scale(1);}
+      100% { border-radius: 40% 60% 30% 70%; transform: translate(-40px, -30px) scale(1.2);}
     }
   </style>
 </head>
 <body>
+  <div class="bg-glow"></div>
+  <div class="blob"></div>
+  <div class="cursor" id="cursor"></div>
 
-  <header>
-    <button id="darkToggle">🌙 Dark Mode</button>
-    <h1>Hello, I'm Rym</h1>
-    <p>Web Developer & Designer</p>
-  </header>
+  <div class="container">
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">Rym Tacine</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
-  <section>
-    <h2>About Me</h2>
-    <p> Hi! I'm a web developer dedicated to creating clean, functional, and visually engaging websites. Turning ideas into reality through code and design. Whether it's a personal blog, an e-commerce store, or a landing page — every project you see here has been handcrafted with attention to detail and a love for the process.
-
-With each website I build, I aim to blend creativity with usability, ensuring responsive layouts, smooth user experiences, and modern aesthetics. I'm constantly learning and improving, and this portfolio is a reflection of my journey, skills, and growth in web development.</p>
-
-<P>Let’s build something amazing together!👩‍💻</p>
-
-  </section>
-
-  <section>
-    <h2>My Projects</h2>
-    <div class="project">
-      <h3>Blogs</h3>
-      <p>Shares insights, tips, and updates on topics that matter to our community.</p>
-      <a href="https://selverleafblog.onrender.com/" target="_blank">View Project</a>
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="badge"><i class="fas fa-code"></i> Creative developer & visual designer</div>
+      <h1>Rym Tacine<br><span class="highlight">web developer</span></h1>
+      <p>I build modern websites and applications that are fast, scalable, and thoughtfully designed to deliver seamless user experiences..</p>
+      <div class="btn-group">
+        <a href="#work" class="btn btn-primary"><i class="fas fa-arrow-down"></i> See work</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Let's talk</a>
+      </div>
     </div>
-    <div class="project">
-      <h3>E-learning Platform</h3>
-      <p>Learn anytime, anywhere, at your own pace.</p>
-      <a href="https://ecusoft.academy/" target="_blank">View Project</a>
-    </div>
-    <div class="project">
-      <h3>Helps</h3>
-      <p>Tips to get your health better.</p>
-      <a href="https://habit-gardenn.onrender.com/" target="_blank">View Project</a>
-    </div>
-    <div class="project">
-      <h3>Brand</h3>
-      <p>brand made.</p>
-      <a href="https://itsok-brand.onrender.com" target="_blank">View Project</a>
-    </div>
-  </section>
 
-  <section>
-    <h2>Contact Me</h2>
-    <p>Think your project deserves to be more than just an idea? Let's connect → <a href="https://www.instagram.com/rymxdev?igsh=MW8yYTRodHNsdTNyeA==" target="_blank">Instagram</a></p>
-  </section>
+    <!-- Skills marquee (creative twist) -->
+    <div class="skills-section">
+      <div class="section-title"><i class="fas fa-bolt"></i> tech toolkit</div>
+      <div class="marquee">
+        <div class="marquee-content">
+          <span><i class="fab fa-react"></i> React.js</span>
+          <span><i class="fab fa-js"></i> JavaScript/TS</span>
+          <span><i class="fab fa-vuejs"></i> Vue.js</span>
+          <span><i class="fab fa-node-js"></i> Node.js</span>
+          <span><i class="fab fa-python"></i> Python</span>
+          <span><i class="fab fa-tailwind"></i> Tailwind</span>
+          <span><i class="fas fa-database"></i> MongoDB</span>
+          <span><i class="fab fa-figma"></i> Figma</span>
+          <span><i class="fab fa-git-alt"></i> Git</span>
+          <span><i class="fas fa-cloud"></i> Cloud (AWS)</span>
+          <span><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+          <!-- duplicate for seamless loop -->
+          <span><i class="fab fa-react"></i> React.js</span>
+          <span><i class="fab fa-js"></i> JavaScript/TS</span>
+          <span><i class="fab fa-vuejs"></i> Vue.js</span>
+          <span><i class="fab fa-node-js"></i> Node.js</span>
+        </div>
+      </div>
+    </div>
 
-  <footer>
-    <p>© 2025 All rights reserved — Rym</p>
-  </footer>
+    <!-- Projects Section (creative portfolio work) -->
+    <div class="projects" id="work">
+      <div class="section-title"><i class="fas fa-laptop-code"></i> featured projects</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-globe-americas"></i></div>
+          <h3>Blogs</h3>
+          <p>fully responsive blog that delivers fast, engaging, and user-friendly content experiences.</p>
+          <div class="tech-stack">
+            <span class="tech">Html</span>
+            <span class="tech">Css</span>
+            <span class="tech">JavaScript</span>
+          </div>
+          <a href="https://selverleafblog.onrender.com/" class="project-link">Live demo →</a>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Accounting Software</h3>
+          <p>Accounting Software designed to simplify financial management, streamline workflows, and improve accuracy.</p>
+          <div class="tech-stack">
+            <span class="tech">Vue.js</span>
+            <span class="tech">Electron</span>
+            <span class="tech">Express</span>
+          </div>
+          <a href="https://www.instagram.com/rymxdev?igsh=MW8yYTRodHNsdTNyeA==" class="project-link">DM me to get yours →</a>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-crown"></i></div>
+          <h3>Brand</h3>
+          <p>Brand built from the ground up.</p>
+          <div class="tech-stack">
+            <span class="tech">Next.js</span>
+            <span class="tech">Tailwind</span>
+            <span class="tech">Stripe</span>
+          </div>
+          <a href="https://itsokbrandd.netlify.app/" class="project-link">Explore →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About + Contact creative section -->
+    <div class="about-contact" id="contact">
+      <div class="about-box">
+        <h2><i class="fas fa-user-astronaut"></i> about rym</h2>
+        <p>Hey, I’m Rym — I turn ideas into functional, engaging websites and applications. With 2+ years of experience, I’ve collaborated with startups and agencies to deliver fast, modern, and accessible digital solutions.I’m passionate about creating seamless, intuitive digital experiences that engage and delight users. Outside of building websites and applications, I explore generative art and contribute to open-source projects.</p>
+        <div class="social-links">
+          
+          <a href="https://www.linkedin.com/in/rym-tacine" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/rymxdev" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          
+        </div>
+      </div>
+      <div class="contact-box">
+        <h2><i class="fas fa-paper-plane"></i> drop a message</h2>
+<form action="https://formspree.io/f/mbdpeqgp" method="POST">
+  <input type="text" name="name" placeholder="your name" required>
+  <input type="email" name="_replyto" placeholder="email address" required>
+  <textarea name="message" rows="3" placeholder="tell me about your idea..." required></textarea>
+  <button type="submit"><i class="fas fa-sparkles"></i> send creative vibe</button>
+</form>
+        <p style="font-size: 0.8rem; margin-top: 12px; color:#8b9ac9;"><i class="fas fa-envelope"></i> rymxdev@gmail.com</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 Rym Tacine.</p>
+    </footer>
+  </div>
 
   <script>
-    const toggleBtn = document.getElementById('darkToggle');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      toggleBtn.textContent = document.body.classList.contains('dark') ? "☀️ Light Mode" : "🌙 Dark Mode";
+    // custom cursor following
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 4 + 'px';
+      cursor.style.top = e.clientY - 4 + 'px';
     });
+    // hide default cursor only on body (optional)
+    document.body.style.cursor = 'none';
+    cursor.style.display = 'block';
+    // but on interactive elements we want default? we will revert with a class or fine.
+    // improve: show default on links/buttons? but it's a creative effect.
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, .btn');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(2)';
+        cursor.style.background = '#c084fc';
+        cursor.style.mixBlendMode = 'normal';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        cursor.style.background = '#a5b4fc';
+        cursor.style.mixBlendMode = 'difference';
+      });
+    });
+    // handle contact form submit with creative alert + reset
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('nameInput').value.trim();
+        const email = document.getElementById('emailInput').value.trim();
+        const msg = document.getElementById('msgInput').value.trim();
+        if(name && email && msg) {
+          // creative toast-like alert (custom style)
+          const toast = document.createElement('div');
+          toast.innerText = `✨ Merci ${name}! Your creative message traveled through the network. ✨`;
+          toast.style.position = 'fixed';
+          toast.style.bottom = '30px';
+          toast.style.left = '50%';
+          toast.style.transform = 'translateX(-50%)';
+          toast.style.background = '#1f2937';
+          toast.style.backdropFilter = 'blur(12px)';
+          toast.style.border = '1px solid #a5b4fc';
+          toast.style.color = '#e2e8ff';
+          toast.style.padding = '12px 28px';
+          toast.style.borderRadius = '60px';
+          toast.style.fontWeight = '500';
+          toast.style.zIndex = '9999';
+          toast.style.fontSize = '0.9rem';
+          toast.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.3)';
+          document.body.appendChild(toast);
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 600);
+          }, 3000);
+          contactForm.reset();
+        } else {
+          const warning = document.createElement('div');
+          warning.innerText = `✧ fill all fields before sending ✧`;
+          warning.style.position = 'fixed';
+          warning.style.bottom = '30px';
+          warning.style.left = '50%';
+          warning.style.transform = 'translateX(-50%)';
+          warning.style.background = '#2d1a3b';
+          warning.style.border = '1px solid #f472b6';
+          warning.style.color = '#fbcfe8';
+          warning.style.padding = '10px 24px';
+          warning.style.borderRadius = '40px';
+          warning.style.zIndex = '9999';
+          warning.style.fontSize = '0.85rem';
+          document.body.appendChild(warning);
+          setTimeout(() => {
+            warning.style.opacity = '0';
+            setTimeout(() => warning.remove(), 500);
+          }, 2000);
+        }
+      });
+    }
+
+    // smooth anchor scroll for nav & buttons
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if(targetId === "#" || targetId === "") return;
+        const targetEl = document.querySelector(targetId);
+        if(targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    // small parallax tilt for project cards? not needed, but keep creative.
+    // add dynamic year footer? already static.
+    const yearSpan = document.querySelector('footer p');
+    if(yearSpan) {
+      // keep original but add subtle, leave as is.
+    }
+    // accessibility fix: show default cursor on touch devices
+    if(window.matchMedia("(pointer: coarse)").matches) {
+      document.body.style.cursor = 'auto';
+      if(cursor) cursor.style.display = 'none';
+    }
   </script>
 </body>
 </html>
-
 
 
 
